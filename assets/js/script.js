@@ -24,9 +24,13 @@ $(document).ready(function () {
         // saves it as a key pair, can find all values for time...
         localStorage.setItem(time, value);
 
+        // notify user the task has been saved
+        // .notification in html 
+        // change from hide to show
+        $('.notification').addClass('show');
 
-        // will need to clear description when saved.
-        
+        // will need to clear notification.
+
 
     })
     //
@@ -35,11 +39,22 @@ $(document).ready(function () {
     // attribute of each time-block be used to conditionally add or remove the
     // past, present, and future classes? How can Day.js be used to get the
     // current hour in 24-hour time?
+    var currentDay = dayjs();
+    var currentHour = currentDay.hour();
+
+    // need to separate block hour from clicked on button to compare to current time to apply past, present, or future.
+    // this. parent?
+    
+    
     //
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
     //
     // TODO: Add code to display the current date in the header of the page.
+    // target currentday class in html,
+    // use currentDay var
+    // set text of element to time using formatting
+    $('#currentDay').text(currentDay.format('dddd, MMMM D, YYYY'));
   });
   
