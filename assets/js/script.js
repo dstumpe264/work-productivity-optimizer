@@ -42,9 +42,21 @@ $(document).ready(function () {
     var currentDay = dayjs();
     var currentHour = currentDay.hour();
 
+    // update current time to display correct past, present or future
     // need to separate block hour from clicked on button to compare to current time to apply past, present, or future.
     // this. parent?
     
+    // use jQuery to iterate over block hours and compare against current hour
+    $('.time-block').each(function(){
+        // need to separate hour int from text
+        // parseInt will convert string to integet to make it easier to compare 
+        // 'this' refers to the current iteration of time-block
+        // split is wherem
+        if(currentHour > parseInt($(this).attr('id').split('-')[1])){
+
+        };
+
+    })
     
     //
     // TODO: Add code to get any user input that was saved in localStorage and set
