@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         // save time and description
         // saves it as a key pair, can find all values for time...
-        localStorage.setItem(time, JSON.stringify(value));
+        localStorage.setItem(time, value);
 
         // notify user the task has been saved
         // .notification in html 
@@ -78,7 +78,7 @@ $(document).ready(function () {
         // attribute of each time-block be used to do this?
         // was getting error 'unexpected end of JSON input', trying to parse null?
         if(localStorage.getItem($(this).attr('id')) != null){
-            var storedvalue = JSON.parse(localStorage.getItem($(this).attr('id')));
+            var storedvalue = localStorage.getItem($(this).attr('id'));
             $(this).children('.description').text(storedvalue);
 
         }
