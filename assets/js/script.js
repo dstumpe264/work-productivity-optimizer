@@ -22,17 +22,21 @@ $(document).ready(function () {
 
         // save time and description
         // saves it as a key pair, can find all values for time...
-        localStorage.setItem(time, value);
+        localStorage.setItem(time, JSON.stringify(value));
 
         // notify user the task has been saved
         // .notification in html 
         // change from hide to show
         $('.notification').addClass('show');
-
+        
         // will need to clear notification.
+        setTimeout(function(){
+            $('.notification').removeClass('show');
+        }, 5000);
 
 
-    })
+
+    });
     //
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
@@ -41,7 +45,8 @@ $(document).ready(function () {
     // current hour in 24-hour time?
     var currentDay = dayjs();
     var currentHour = currentDay.hour();
-
+    // confirm what currenthour looks like
+    console.log(currentHour);
     // update current time to display correct past, present or future
     // need to separate block hour from clicked on button to compare to current time to apply past, present, or future.
     // this. parent?
@@ -49,24 +54,42 @@ $(document).ready(function () {
     // use jQuery to iterate over block hours and compare against current hour
     $('.time-block').each(function(){
         // need to separate hour int from text
-        // parseInt will convert string to integet to make it easier to compare 
+        // parseInt will convert string to integer to make it easier to compare 
         // 'this' refers to the current iteration of time-block
-        // split is wherem
+        // split is where it removes hour- from div id to determine current time block
+        // console.log used to figure out what 'this' looks like
+        // console.log(this);
+        // if currentHour is greater than time current time block
         if(currentHour > parseInt($(this).attr('id').split('-')[1])){
+            // set time block to past
 
+            $(this).addClass('past');
+        }
+        else if(currentHour < parseInt($(this).attr('id').split('-')[1])){
+            // set time block to past
+            $(this).addClass('future');
+        }
+        else{
+            // set time block to present
+            $(this).addClass('present');
         };
+        // TODO: Add code to get any user input that was saved in localStorage and set
+        // the values of the corresponding textarea elements. HINT: How can the id
+        // attribute of each time-block be used to do this?
+        var storedvalue = JSON.parse(localStorage.getItem($(this).attr('id')));
+        $(this).children('.description').text(storedvalue);
+        console.log($(this).children('.description').text());
 
-    })
+        
+    });
     
     //
-    // TODO: Add code to get any user input that was saved in localStorage and set
-    // the values of the corresponding textarea elements. HINT: How can the id
-    // attribute of each time-block be used to do this?
     //
     // TODO: Add code to display the current date in the header of the page.
     // target currentday class in html,
     // use currentDay var
     // set text of element to time using formatting
     $('#currentDay').text(currentDay.format('dddd, MMMM D, YYYY'));
+    $('#currentTime').text(currentDay.format('hh:mm'));
   });
   
